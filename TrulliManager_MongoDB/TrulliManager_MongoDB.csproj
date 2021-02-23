@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>d4e31d54-cb3a-43d8-96d9-bd431e96eff6</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="HotChocolate" Version="11.0.9" />
+    <PackageReference Include="HotChocolate.AspNetCore" Version="11.0.9" />
+    <PackageReference Include="HotChocolate.AspNetCore.Playground" Version="10.5.5" />
+    <PackageReference Include="HotChocolate.Data" Version="11.0.9" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.9" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TrulliManager.Database\TrulliManager.Database.csproj" />
+    <ProjectReference Include="..\TrulliManager.Repository\TrulliManager.Repository.csproj" />
+  </ItemGroup>
+
+</Project>
