@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
+using MongoDB.Driver;
+using MongoDB.Driver.Linq;
 using TrulliManager.Database;
 using TrulliManager.Database.Models;
 using TrulliManager.Repository.Abstract;
@@ -15,26 +16,22 @@ namespace TrulliManager.Repository.Concrete
             _db = db;
         }
 
-        public IQueryable<Property> GetAll()
+        public IMongoQueryable<Property> GetAll()
         {
-            var collection = _db.GetCollection<Interactions>("Interactions");
-            var result = IMongoCollectionExtensions
-                        .AsQueryable(collection)
-                        .FirstOrDefault(s => s.SiteName == "Example");
-            return _db.Properties.Include(t => t.Trulli);
+            return _db.Properties.AsQueryable();
         }
 
-        //public Property GetById(int id)
-        //{
-        //    return _db.Properties.SingleOrDefault(x => x.Id == id);
-        //}
+        public Property GetByName(string name)
+        {
+            return _db.Properties.Find(document => document.Name.Equals(name)).FirstOrDefault();
+        }
 
-        //public Property Create(Property property)
-        //{
-        //    _db.Properties.Add(property);
-        //    _db.SaveChanges();
-        //    return property;
-        //}
+        public Property Create(Property property)
+        {
+            _db.Properties.Add(property);
+            _db.SaveChanges();
+            return property;
+        }
 
     }
 }

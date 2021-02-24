@@ -8,8 +8,8 @@ namespace TrulliManager.Repository.Abstract
 {
     public interface IPropertyRepository
     {
-        //IQueryable<Property> GetAll();
-        //Property GetById(int id);
+        IQueryable<Property> GetAll();
+        Property GetById(string name);
         //Property Create(Property property);
     }
 }
