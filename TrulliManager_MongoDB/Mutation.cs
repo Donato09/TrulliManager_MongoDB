@@ -21,48 +21,48 @@ namespace TrulliManager_MongoDB
             _propertyRepository = propertyRepository;
         }
 
-        //public async Task<Trullo> CreateTrullo([Service]ITrulloRepository trulloRepository, [Service]ITopicEventSender eventSender, CreateTrulloInput trullo)
-        //{
-        //    Trullo newTrullo = new Trullo
-        //    {
-        //        //Id = _trulloRepository.GetAll().Max(x => x.Id) + 1,
-        //        Name = trullo.Name,
-        //        Description = trullo.Description,
-        //        Capacity = trullo.Capacity,
-        //        Price = trullo.Price,
-        //        PropertyId = trullo.PropertyId
-        //    };
+        public async Task<Trullo> CreateTrullo([Service] ITrulloRepository trulloRepository, [Service] ITopicEventSender eventSender, CreateTrulloInput trullo)
+        {
+            Trullo newTrullo = new Trullo
+            {
+                Trullo_id = Guid.NewGuid(),
+                Name = trullo.Name,
+                Description = trullo.Description,
+                Capacity = trullo.Capacity,
+                Price = trullo.Price,
+                Property_id = trullo.PropertyId
+            };
 
-        //    var createdTrullo = await trulloRepository.Create(newTrullo);
+            var createdTrullo = await trulloRepository.Create(newTrullo);
 
-        //    await eventSender.SendAsync("TrulloCreated", createdTrullo);
+            await eventSender.SendAsync("TrulloCreated", createdTrullo);
 
-        //    return createdTrullo;
-        //}
+            return createdTrullo;
+        }
 
-        //public Trullo DeleteTrullo(DeleteTrulloInput deletedTrullo)
-        //{
-        //    Trullo oldTrullo = new Trullo
-        //    {
-        //        Id = deletedTrullo.Id
-        //    };
+        public Trullo DeleteTrullo(DeleteTrulloInput deletedTrullo)
+        {
+            Trullo oldTrullo = new Trullo
+            {
+                Trullo_id = deletedTrullo.Id
+            };
 
-        //    return _trulloRepository.Delete(oldTrullo);
-        //}
+            return _trulloRepository.Delete(oldTrullo);
+        }
 
-        //public Property CreateProperty(CreatePropertyInput property)
-        //{
-        //    Property newProperty = new Property
-        //    {
-        //        Id = _propertyRepository.GetAll().Max(x => x.Id) + 1,
-        //        Name = property.Name,
-        //        City = property.City,
-        //        Street = property.Street,
-        //        Spa = property.Spa,
-        //        SwimmingPool = property.SwimmingPool
-        //    };
+        public Property CreateProperty(CreatePropertyInput property)
+        {
+            Property newProperty = new Property
+            {
+                Property_id = Guid.NewGuid(),
+                Name = property.Name,
+                City = property.City,
+                Street = property.Street,
+                Spa = property.Spa,
+                SwimmingPool = property.SwimmingPool,
+            };
 
-        //    return _propertyRepository.Create(newProperty);
-        //}
+            return _propertyRepository.Create(newProperty);
+        }
     }
 }

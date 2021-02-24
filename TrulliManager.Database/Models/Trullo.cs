@@ -1,5 +1,6 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using System;
 
 namespace TrulliManager.Database.Models
 {
@@ -7,14 +8,19 @@ namespace TrulliManager.Database.Models
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public ObjectId Id { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public int Capacity { get; set; }
-        public decimal Price { get; set; }
-        //public Property Property { get; set; }
+        public string _id { get; set; }
 
-        [BsonRepresentation(BsonType.ObjectId)]
-        public string Property { get; set; }
+        public Guid Trullo_id { get; set; }
+
+        public string Name { get; set; }
+
+        public string Description { get; set; }
+
+        public int Capacity { get; set; }
+
+        public decimal Price { get; set; }
+
+        public Guid Property_id { get; set; }
+
     }
 }

@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MongoDbQuickWatch\MongoDbQuickWatch.csproj" />
     <ProjectReference Include="..\TrulliManager.Database\TrulliManager.Database.csproj" />
     <ProjectReference Include="..\TrulliManager.Repository\TrulliManager.Repository.csproj" />
   </ItemGroup>

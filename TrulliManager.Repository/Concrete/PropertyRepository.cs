@@ -28,8 +28,7 @@ namespace TrulliManager.Repository.Concrete
 
         public Property Create(Property property)
         {
-            _db.Properties.Add(property);
-            _db.SaveChanges();
+            _db.Properties.InsertOne(property);
             return property;
         }
 

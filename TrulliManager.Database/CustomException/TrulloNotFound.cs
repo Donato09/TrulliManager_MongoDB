@@ -6,6 +6,6 @@ namespace TrulliManager.Database.CustomException
 {
     public class TrulloNotFound : Exception
     {
-        public int TrulloId { get; set; }
+        public Guid TrulloId { get; set; }
     }
 }

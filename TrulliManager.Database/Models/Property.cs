@@ -1,5 +1,6 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using System;
 using System.Collections.Generic;
 
 namespace TrulliManager.Database.Models
@@ -8,7 +9,9 @@ namespace TrulliManager.Database.Models
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public ObjectId Id { get; set; }
+        public string _id { get; set; }
+
+        public Guid Property_id { get; set; }
 
         [BsonElement("Name")]
         public string Name { get; set; }
@@ -25,10 +28,5 @@ namespace TrulliManager.Database.Models
         [BsonElement("SwimmingPool")]
         public bool SwimmingPool { get; set; }
 
-        //[BsonRepresentation(BsonType.ObjectId)]
-        //public List<string> Trulli { get; set; }
-
-        [BsonIgnore]
-        public List<Trullo> TrulloList { get; set; }
     }
 }

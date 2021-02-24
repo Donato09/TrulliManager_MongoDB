@@ -2,7 +2,8 @@
 using HotChocolate.Data;
 using HotChocolate.Subscriptions;
 using HotChocolate.Types;
-using System.Linq;
+using MongoDB.Driver.Linq;
+using System;
 using System.Threading.Tasks;
 using TrulliManager.Database.Models;
 using TrulliManager.Repository.Abstract;
@@ -20,22 +21,22 @@ namespace TrulliManager_MongoDB
             _trulloRepository = trulloRepository;
         }
 
-        //[UsePaging]
-        //[UseFiltering]
-        //[UseSorting]
-        //public IQueryable<Property> Properties => _propertyRepository.GetAll();
+        [UsePaging]
+        [UseFiltering]
+        [UseSorting]
+        public IMongoQueryable<Property> Properties => _propertyRepository.GetAll();
 
-        //public async Task<Trullo> GetTrulloById([Service] ITrulloRepository trulloRepository, [Service]ITopicEventSender eventSender, int id)
-        //{
-        //    Trullo trulloResult = trulloRepository.GetTrulloById(id);
-        //    await eventSender.SendAsync("ReturnedTrullo", trulloResult);
+        public async Task<Trullo> GetTrulloById([Service] ITrulloRepository trulloRepository, [Service] ITopicEventSender eventSender, Guid id)
+        {
+            Trullo trulloResult = trulloRepository.GetTrulloById(id);
+            await eventSender.SendAsync("ReturnedTrullo", trulloResult);
 
-        //    return trulloResult;
-        //}
+            return trulloResult;
+        }
 
-        //[UsePaging]
-        //[UseFiltering]
-        //[UseSorting]
-        //public IQueryable<Trullo> Trulli => _trulloRepository.GetAll();
+        [UsePaging]
+        [UseFiltering]
+        [UseSorting]
+        public IMongoQueryable<Trullo> Trulli => _trulloRepository.GetAll();
     }
 }

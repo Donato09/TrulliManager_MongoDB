@@ -1,4 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using MongoDB.Bson;
+using MongoDB.Driver;
+using MongoDB.Driver.Linq;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TrulliManager.Database;
@@ -17,39 +21,47 @@ namespace TrulliManager.Repository.Concrete
             _db = db;
         }
 
-        //public IQueryable<Trullo> GetAll()
-        //{
-        //    return _db.Trulli.Include(p => p.Property);
-        //}
+        public IMongoQueryable<Trullo> GetAll()
+        {
+            return _db.Trulli.AsQueryable();
+        }
 
-        //public Trullo GetTrulloById(int id)
-        //{
-        //    var trullo = _db.Trulli
-        //        .Include(p => p.Property)
-        //        .Where(t => t.Id == id)
-        //        .FirstOrDefault();
-            
-        //    return trullo;
-        //}
+        public Trullo GetTrulloById(Guid id)
+        {
+            var trullo = _db.Trulli.AsQueryable()
+                .Where(t => t.Trullo_id == id)
+                .FirstOrDefault();
 
-        //public Trullo Delete(Trullo trullo)
-        //{
-        //    var trulloToDelete = GetAll().FirstOrDefault(t => t.Id == trullo.Id);
-        //    if (trulloToDelete == null)
-        //        throw new TrulloNotFound() { TrulloId = trullo.Id };
-            
-        //    _db.Remove(trulloToDelete);
-        //    _db.SaveChanges();
+            //include property
 
-        //    return trulloToDelete;
-        //}
+            return trullo;
+        }
 
-        //public async Task<Trullo> Create(Trullo trullo)
-        //{
-        //   await _db.AddAsync(trullo);
-        //   await _db.SaveChangesAsync();
+        public Trullo Delete(Trullo trullo)
+        {
+            //var trulloToDelete = GetAll().FirstOrDefault(t => t.Trullo_id == trullo.Trullo_id);
+            //if (trulloToDelete == null)
+            //    throw new TrulloNotFound() { TrulloId = trullo.Trullo_id };
 
-        //    return trullo;
-        //}
+            //_db.Trulli.FindOneAndDelete(trulloToDelete);
+
+            var filter = new BsonDocument("FirstName", "Jack");
+
+            var result = _db.Trulli.FindOneAndDelete(filter);
+
+            if (result == null)
+            {
+                throw new TrulloNotFound() { TrulloId = trullo.Trullo_id };
+            }
+
+            return result;
+        }
+
+        public async Task<Trullo> Create(Trullo trullo)
+        {
+            await _db.Trulli.InsertOneAsync(trullo);
+
+            return trullo;
+        }
     }
 }

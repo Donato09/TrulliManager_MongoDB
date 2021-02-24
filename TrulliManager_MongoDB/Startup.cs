@@ -14,6 +14,8 @@ using HotChocolate;
 using HotChocolate.AspNetCore;
 using TrulliManager.Repository.Abstract;
 using TrulliManager.Repository.Concrete;
+using System.Threading;
+using MongoDbQuickWatch;
 
 namespace TrulliManager_MongoDB
 {
@@ -37,20 +39,23 @@ namespace TrulliManager_MongoDB
             services.AddSingleton<ITrulliManagerDatabaseSettings>(provider =>
                 provider.GetRequiredService<IOptions<TrulliManagerDatabaseSettings>>().Value);
 
-            //services.AddTransient(typeof(DbContext), typeof(TrulliContext));
+            //services.AddTransient<IMongoDbWatch, MongoDbWatch>();
+
             services.AddTransient<IPropertyRepository, PropertyRepository>();
             services.AddTransient<ITrulloRepository, TrulloRepository>();
 
             services.AddInMemorySubscriptions();
 
+            services.AddScoped<TrulliContext>();
+
             services.AddScoped<IPropertyRepository, PropertyRepository>();
             services.AddScoped<ITrulloRepository, TrulloRepository>();
 
-            services.AddScoped<TrulliContext>();
             //services.AddScoped<TrulloType>();
             //services.AddScoped<PropertyType>();
-            //services.AddScoped<Query>();
-            //services.AddScoped<Mutation>();
+            services.AddScoped<Query>();
+            services.AddScoped<Mutation>();
+            services.AddScoped<Subscription>();
 
             services
                 .AddRouting()
@@ -69,6 +74,12 @@ namespace TrulliManager_MongoDB
             if (env.IsDevelopment())
             {
                 app.UsePlayground();
+
+                // Blocking
+                //app.ApplicationServices.GetRequiredService<MongoDbWatch>().Watch();
+
+                // Non-blocking
+                //Task.Run(() => { app.ApplicationServices.GetRequiredService<IMongoDbWatch>().Watch(); });
             }
 
             //preload db
