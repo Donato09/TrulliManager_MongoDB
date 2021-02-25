@@ -11,6 +11,7 @@ namespace TrulliManager.Database.Models
         [BsonRepresentation(BsonType.ObjectId)]
         public string _id { get; set; }
 
+        [BsonGuidRepresentation(GuidRepresentation.Standard)]
         public Guid Property_id { get; set; }
 
         [BsonElement("Name")]

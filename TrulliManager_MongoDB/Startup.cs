@@ -64,7 +64,8 @@ namespace TrulliManager_MongoDB
                 .AddMutationType<Mutation>()
                 .AddSubscriptionType<Subscription>()
                 .AddFiltering()
-                .AddSorting();
+                .AddSorting()
+                .AddProjections();
 
         }
 

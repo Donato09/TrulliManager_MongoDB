@@ -10,6 +10,7 @@ namespace TrulliManager.Database.Models
         [BsonRepresentation(BsonType.ObjectId)]
         public string _id { get; set; }
 
+        [BsonGuidRepresentation(GuidRepresentation.Standard)]
         public Guid Trullo_id { get; set; }
 
         public string Name { get; set; }
@@ -20,6 +21,7 @@ namespace TrulliManager.Database.Models
 
         public decimal Price { get; set; }
 
+        [BsonGuidRepresentation(GuidRepresentation.Standard)]
         public Guid Property_id { get; set; }
 
     }
