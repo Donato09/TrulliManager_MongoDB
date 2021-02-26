@@ -10,9 +10,9 @@ namespace TrulliManager.Database
     {
         public static void EnsureSeedData(this TrulliContext db)
         {
-            Guid donAntonio = Guid.NewGuid();
-            Guid cinquenoci = Guid.NewGuid();
-            Guid carbonaio = Guid.NewGuid();
+            BsonObjectId donAntonio = ObjectId.GenerateNewId();
+            BsonObjectId cinquenoci = ObjectId.GenerateNewId();
+            BsonObjectId carbonaio = ObjectId.GenerateNewId();
 
             if (db.Properties.CountDocuments(new BsonDocument()) == 0 || db.Trulli.CountDocuments(new BsonDocument()) == 0)
             {
@@ -21,7 +21,7 @@ namespace TrulliManager.Database
                 {
                     new Property
                     {
-                        Property_id = donAntonio,
+                        _id = donAntonio.AsString,
                         Name = "Trulli Don Antonio",
                         City = "Locorotondo",
                         Street = "S.C. 21 C.da Crocifisso n. 9",
@@ -30,7 +30,7 @@ namespace TrulliManager.Database
                     },
                     new Property
                     {
-                        Property_id = cinquenoci,
+                        _id = cinquenoci.AsString,
                         Name = "Trulli Cinquenoci",
                         City = "Locorotondo",
                         Street = "S.C. 126 C.da Cinquenoci n. 6",
@@ -39,7 +39,7 @@ namespace TrulliManager.Database
                     },
                     new Property
                     {
-                        Property_id = carbonaio,
+                        _id = carbonaio.AsString,
                         Name = "Casa del Carbonaio",
                         City = "Locorotondo",
                         Street = "Via Garibaldi n. 17",
@@ -52,8 +52,8 @@ namespace TrulliManager.Database
                 {
                     new Trullo
                     {
-                        Trullo_id = Guid.NewGuid(),
-                        Property_id = donAntonio,
+                        _id = ObjectId.GenerateNewId().ToString(),
+                        Property_id = donAntonio.AsString,
                         Name = "Trullo Panoramico",
                         Description = "Trullo con soppalco con 2 camere da letto e 2 bagni",
                         Capacity = 4,
@@ -61,8 +61,8 @@ namespace TrulliManager.Database
                     },
                     new Trullo
                     {
-                        Trullo_id = Guid.NewGuid(),
-                        Property_id = donAntonio,
+                        _id = ObjectId.GenerateNewId().ToString(),
+                        Property_id = donAntonio.AsString,
                         Name = "Trullo dell'Interprete",
                         Description = "Trullo in ambiente unico con 1 camera da letto e 1 bagno",
                         Capacity = 3,
@@ -70,8 +70,8 @@ namespace TrulliManager.Database
                     },
                     new Trullo
                     {
-                        Trullo_id = Guid.NewGuid(),
-                        Property_id = donAntonio,
+                        _id = ObjectId.GenerateNewId().ToString(),
+                        Property_id = donAntonio.AsString,
                         Name = "Trullo dell'Arco",
                         Description = "Trullo ampio con 2 camere da letto e 1 bagno",
                         Capacity = 4,
@@ -79,8 +79,8 @@ namespace TrulliManager.Database
                     },
                     new Trullo
                     {
-                        Trullo_id = Guid.NewGuid(),
-                        Property_id = cinquenoci,
+                        _id = ObjectId.GenerateNewId().ToString(),
+                        Property_id = cinquenoci.AsString,
                         Name = "Trullo Mille Volte",
                         Description = "Trullo a volte in pietra con 3 camere da letto e 2 bagni",
                         Capacity = 7,
@@ -88,8 +88,8 @@ namespace TrulliManager.Database
                     },
                     new Trullo
                     {
-                        Trullo_id = Guid.NewGuid(),
-                        Property_id = cinquenoci,
+                        _id = ObjectId.GenerateNewId().ToString(),
+                        Property_id = cinquenoci.AsString,
                         Name = "Trullo Romantico",
                         Description = "Trullo in ambiente unico con 1 camera da letto e 1 bagno",
                         Capacity = 2,
@@ -97,8 +97,8 @@ namespace TrulliManager.Database
                     },
                     new Trullo
                     {
-                        Trullo_id = Guid.NewGuid(),
-                        Property_id = cinquenoci,
+                        _id = ObjectId.GenerateNewId().ToString(),
+                        Property_id = cinquenoci.AsString,
                         Name = "Trullo Nuovo",
                         Description = "Trullo di nuova costruzione con 2 camere da letto e 1 bagno",
                         Capacity = 4,
@@ -106,8 +106,8 @@ namespace TrulliManager.Database
                     },
                     new Trullo
                     {
-                        Trullo_id = Guid.NewGuid(),
-                        Property_id = carbonaio,
+                        _id = ObjectId.GenerateNewId().ToString(),
+                        Property_id = carbonaio.AsString,
                         Name = "Trullo del Carbonaio",
                         Description = "Trullo a volte in pietra nel centro storico con 1 camera da letto e 2 bagni",
                         Capacity = 7,

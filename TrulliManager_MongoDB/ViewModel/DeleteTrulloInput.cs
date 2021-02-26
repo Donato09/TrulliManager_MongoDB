@@ -7,6 +7,6 @@ namespace TrulliManager_MongoDB.ViewModel
 {
     public class DeleteTrulloInput
     {
-        public Guid Id { get; set; }
+        public string Id { get; set; }
     }
 }

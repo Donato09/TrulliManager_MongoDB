@@ -26,12 +26,12 @@ namespace TrulliManager.Repository.Concrete
             return _db.Trulli.AsQueryable();
         }
 
-        public Trullo GetTrulloById(Guid id)
+        public Trullo GetTrulloById(string id)
         {
             var trullo = _db.Trulli.AsQueryable()
-                .Where(t => t.Trullo_id == id)
+                .Where(t => t._id == id)
                 .FirstOrDefault();
-
+            
             //include property
 
             return trullo;
@@ -51,7 +51,7 @@ namespace TrulliManager.Repository.Concrete
 
             if (result == null)
             {
-                throw new TrulloNotFound() { TrulloId = trullo.Trullo_id };
+                throw new TrulloNotFound() { TrulloId = trullo._id };
             }
 
             return result;

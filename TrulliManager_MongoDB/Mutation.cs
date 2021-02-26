@@ -1,5 +1,6 @@
 ﻿using HotChocolate;
 using HotChocolate.Subscriptions;
+using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +26,7 @@ namespace TrulliManager_MongoDB
         {
             Trullo newTrullo = new Trullo
             {
-                Trullo_id = Guid.NewGuid(),
+                _id = ObjectId.GenerateNewId().ToString(),
                 Name = trullo.Name,
                 Description = trullo.Description,
                 Capacity = trullo.Capacity,
@@ -44,7 +45,7 @@ namespace TrulliManager_MongoDB
         {
             Trullo oldTrullo = new Trullo
             {
-                Trullo_id = deletedTrullo.Id
+                _id = deletedTrullo.Id
             };
 
             return _trulloRepository.Delete(oldTrullo);
@@ -54,7 +55,7 @@ namespace TrulliManager_MongoDB
         {
             Property newProperty = new Property
             {
-                Property_id = Guid.NewGuid(),
+                _id = ObjectId.GenerateNewId().ToString(),
                 Name = property.Name,
                 City = property.City,
                 Street = property.Street,

@@ -12,7 +12,7 @@ namespace TrulliManager.Repository.Abstract
     {
         IMongoQueryable<Trullo> GetAll();
         Trullo Delete(Trullo trullo);
-        Trullo GetTrulloById(Guid id);
+        Trullo GetTrulloById(string id);
         Task<Trullo> Create(Trullo trullo);
     }
 }
