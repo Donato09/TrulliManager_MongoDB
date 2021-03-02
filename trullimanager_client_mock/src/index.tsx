@@ -1,42 +1,33 @@
-import React from 'react';
-import { render } from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import { ApolloClient, InMemoryCache } from '@apollo/client';
-import { gql } from '@apollo/client';
-import { ApolloProvider } from '@apollo/client';
+import { makeExecutableSchema } from '@graphql-tools/schema';
+import { addMocksToSchema } from '@graphql-tools/mock';
+import { graphql } from 'graphql';
+import { loadSchema } from '@graphql-tools/load'
+import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader'
 
-const client = new ApolloClient({
-  uri: 'http://localhost:3000/graphql',
-  cache: new InMemoryCache()
+// Fill this in with the schema string
+//const schemaString = `...`;
+
+// Make a GraphQL schema with no resolvers
+//const schema = makeExecutableSchema({ typeDefs: schemaString });
+
+const schema = await loadSchema('schema.graphql', {  // load from a single schema file
+  loaders: [
+      new GraphQLFileLoader()
+  ]
 });
 
-client
-  .query({
-    query: gql`
-      query GetRates {
-        rates(currency: "USD") {
-          currency
-        }
-      }
-    `
-  })
-  .then(result => console.log(result));
+// Create a new schema with mocks
+const schemaWithMocks = addMocksToSchema({ schema });
 
-  function App() {
-    return (
-      <ApolloProvider client={client}>
-        <div>
-          <h2>My first Apollo app 🚀</h2>
-        </div>
-      </ApolloProvider>
-    );
+const query = `
+query {  
+  properties {    
+    nodes {     
+      id,      
+      name    
+    }  
   }
-  
-  render(<App />, document.getElementById('root'));
+}
+`;
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+graphql(schemaWithMocks, query).then((result) => console.log('Got result', result));
