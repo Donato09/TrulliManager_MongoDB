@@ -23,7 +23,7 @@ type PageInfo {
 }
 
 type Property {
-  _id: String
+  _id: ID!
   name: String
   city: String
   street: String
@@ -62,8 +62,8 @@ type Subscription {
 }
 
 type Trullo {
-  _id: String
-  property_id: String!
+  _id: ID!
+  property_id: ID!
   name: String
   description: String
   capacity: Int!
@@ -136,11 +136,11 @@ input CreateTrulloInput {
   description: String
   capacity: Int!
   price: Decimal!
-  propertyId: String
+  propertyId: ID
 }
 
 input DeleteTrulloInput {
-  id: String
+  id: ID!
 }
 
 input ListFilterInputTypeOfTrulloFilterInput {

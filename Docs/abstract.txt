@@ -1,0 +1,7 @@
+
+GRAPHQL FROM CLIENT TO SERVER
+
+ABSTRACT
+
+GraphQL is a great way to expose your APIs and it has changed the way we think about consuming data over HTTP. 
+We will see how we can build a GraphQL API with Hot Chocolate on ASP.Net Core integrated with MongoDb and React Client.
