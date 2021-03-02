@@ -13,7 +13,7 @@ function GetProperties() {
 
   return (
     <div>
-      {properties.map((item) => {
+      {data.properties.map((item) => {
         return (
           <li key={item._id}>
             {item._id} - {item.name} - {item.city} - {item.street}
