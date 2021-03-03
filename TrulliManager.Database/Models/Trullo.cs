@@ -22,5 +22,8 @@ namespace TrulliManager.Database.Models
         public int Capacity { get; set; }
 
         public decimal Price { get; set; }
+
+        [BsonIgnore]
+        public Property Property { get; set; }
     }
 }

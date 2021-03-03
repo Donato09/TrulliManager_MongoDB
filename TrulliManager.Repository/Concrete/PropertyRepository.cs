@@ -1,4 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;
 using TrulliManager.Database;
@@ -30,6 +33,11 @@ namespace TrulliManager.Repository.Concrete
         {
             _db.Properties.InsertOne(property);
             return property;
+        }
+
+        public IEnumerable<Property> GetPropertiesByIds(IEnumerable<string> propertyIds)
+        {
+            return _db.Properties.AsQueryable().Where(x => propertyIds.Contains(x._id));
         }
 
     }

@@ -4,28 +4,14 @@ using HotChocolate.Subscriptions;
 using HotChocolate.Types;
 using MongoDB.Driver.Linq;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using TrulliManager.Database.Models;
 using TrulliManager.Repository.Abstract;
 
 namespace TrulliManager_MongoDB
 {
-    //public class QueryType: ObjectType<Query>
-    //{
-     //   protected override void Configure(IObjectTypeDescriptor<Property> descriptor)
-      //  {
-            // descriptor
-            // .ImplementsNode()
-            // .IdField(d => d.Id)
-            // .ResolveNode(async (ctx, id) => await ctx
-            // .DataLoader<FooDataLoader>()
-            // .LoadAsync(id, ctx.RequestAborted));
-
-            //descriptor.Field(t => t.GetProperties(default)).UseProjection();
-            //descriptor.Field(t => t.GetTrulli(default)).UseProjection();
-     //   }
-   // }
-
     public class Query
     {
         private readonly IPropertyRepository _propertyRepository;
@@ -46,6 +32,22 @@ namespace TrulliManager_MongoDB
         
         //public IMongoQueryable<Property> Properties => _propertyRepository.GetAll();
 
+        [UsePaging]
+        [UseProjection]
+        [UseFiltering]
+        [UseSorting]
+        public async Task<IEnumerable<Trullo>> GetTrulli([Service] ITrulloRepository trulloRepository)
+        {
+            List<Trullo> trulli = new List<Trullo>();
+
+            await Task.Run(() =>
+            {
+                trulli = trulloRepository.GetAll().ToList();
+            });
+
+            return trulli;
+        }
+
         public async Task<Trullo> GetTrulloById([Service] ITrulloRepository trulloRepository, [Service] ITopicEventSender eventSender, string id)
         {
             Trullo trulloResult = trulloRepository.GetTrulloById(id);
@@ -54,12 +56,12 @@ namespace TrulliManager_MongoDB
             return trulloResult;
         }
 
-        [UsePaging]
-        [UseProjection]
-        [UseFiltering]
-        [UseSorting]
-        public IMongoQueryable<Trullo> GetTrulli([Service] ITrulloRepository repository) => 
-            repository.GetAll();
+        // [UsePaging]
+        // [UseProjection]
+        // [UseFiltering]
+        // [UseSorting]
+        // public IMongoQueryable<Trullo> GetTrulli([Service] ITrulloRepository repository) => 
+        //     repository.GetAll();
 
         //public IMongoQueryable<Trullo> Trulli => _trulloRepository.GetAll();
     }

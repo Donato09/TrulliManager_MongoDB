@@ -16,6 +16,7 @@ using TrulliManager.Repository.Abstract;
 using TrulliManager.Repository.Concrete;
 using System.Threading;
 using MongoDbQuickWatch;
+using TrulliManager_MongoDB.Types;
 
 namespace TrulliManager_MongoDB
 {
@@ -63,6 +64,7 @@ namespace TrulliManager_MongoDB
                 .AddQueryType<Query>()
                 .AddMutationType<Mutation>()
                 .AddSubscriptionType<Subscription>()
+                .AddType<TrulloType>()
                 .AddFiltering()
                 .AddSorting()
                 .AddProjections();

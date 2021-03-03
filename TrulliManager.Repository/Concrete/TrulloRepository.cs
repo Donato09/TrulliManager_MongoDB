@@ -64,13 +64,5 @@ namespace TrulliManager.Repository.Concrete
 
             return trullo;
         }
-
-        public async Task<IReadOnlyDictionary<string, Trullo>> GetTrulliAsync(
-            IReadOnlyCollection<string> TrulliId,
-            CancellationToken cancellationToken)
-        {
-            List<Trullo> trulli = await _db.Trulli.Where(c => TrulliId).ToListAsync();
-            return trulli.ToDictionary(t => t._id);
-        }
     }
 }
