@@ -12,12 +12,19 @@ namespace TrulliManager_MongoDB
 {
     //public class QueryType: ObjectType<Query>
     //{
-    //    protected override void Configure(IObjectTypeDescriptor<Query> descriptor)
-    //    {
-    //        descriptor.Field(t => t.GetProperties(default)).UseProjection();
-    //        descriptor.Field(t => t.GetTrulli(default)).UseProjection();
-    //    }
-    //}
+     //   protected override void Configure(IObjectTypeDescriptor<Property> descriptor)
+      //  {
+            // descriptor
+            // .ImplementsNode()
+            // .IdField(d => d.Id)
+            // .ResolveNode(async (ctx, id) => await ctx
+            // .DataLoader<FooDataLoader>()
+            // .LoadAsync(id, ctx.RequestAborted));
+
+            //descriptor.Field(t => t.GetProperties(default)).UseProjection();
+            //descriptor.Field(t => t.GetTrulli(default)).UseProjection();
+     //   }
+   // }
 
     public class Query
     {
