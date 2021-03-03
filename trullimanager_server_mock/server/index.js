@@ -10,19 +10,19 @@ const mocks = {
     Trullo: () => ({
         _id: casual.uuid,
         property_id: casual.uuid,
-        name: casual.name,
+        name: 'Trullo' + casual.title,
         description: casual.description,
         capacity: casual.integer,
         price: casual.double
     }),
     Property: () => ({
         _id: casual.uuid,
-        name: casual.name,
+        name: 'Property ' + casual.title,
         city: casual.city,
         street: casual.street,
         spa: casual.boolean,
         swimmingPool: casual.boolean,
-        trulli: MockList(2)
+        trulli: MockList(3)
     })
   };
 

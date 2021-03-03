@@ -23,7 +23,7 @@ type PageInfo {
 }
 
 type Property {
-  _id: ID!
+  _id: ID
   name: String
   city: String
   street: String

@@ -8,6 +8,7 @@ export const LOAD_PROPERTIES = gql`
       city,
       name,
       trulli {
+        _id,
         name
       }
     }

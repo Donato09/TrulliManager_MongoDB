@@ -7,16 +7,26 @@ function GetProperties() {
   const [properties, setProperties] = useState([]);
   useEffect(() => {
     if (data) {
-      setProperties(data.GetProperties);
+      setProperties(data.properties.nodes);
     }
   }, [data]);
 
   return (
     <div>
-      {data.properties.map((item) => {
+      {properties.map((item) => {
         return (
           <li key={item._id}>
-            {item._id} - {item.name} - {item.city} - {item.street}
+            Property - {item._id} - {item.name} - {item.city} 
+            
+            {item.trulli.map((trulli) => {
+              return (
+              <li key={trulli._id}>
+                Trullo - {trulli._id} - {trulli.name}
+                <br></br>
+              </li> 
+              )
+            })}
+            <br></br>
           </li>
         )
       })}
