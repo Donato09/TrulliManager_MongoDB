@@ -4,6 +4,7 @@ using MongoDB.Driver.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using TrulliManager.Database;
 using TrulliManager.Database.CustomException;
@@ -62,6 +63,14 @@ namespace TrulliManager.Repository.Concrete
             await _db.Trulli.InsertOneAsync(trullo);
 
             return trullo;
+        }
+
+        public async Task<IReadOnlyDictionary<string, Trullo>> GetTrulliAsync(
+            IReadOnlyCollection<string> TrulliId,
+            CancellationToken cancellationToken)
+        {
+            List<Trullo> trulli = await _db.Trulli.Where(c => TrulliId).ToListAsync();
+            return trulli.ToDictionary(t => t._id);
         }
     }
 }
