@@ -10,7 +10,7 @@ const mocks = {
     Trullo: () => ({
         _id: casual.uuid,
         property_id: casual.uuid,
-        name: 'Trullo' + casual.title,
+        name: 'Trullo ' + casual.title,
         description: casual.description,
         capacity: casual.integer,
         price: casual.double

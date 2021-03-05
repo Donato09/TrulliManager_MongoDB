@@ -1,34 +1,34 @@
 import React, { useState } from "react";
-import { CREATE_PROPERTY_MUTATION } from "../GraphQL/Mutations";
+import { CREATE_TRULLO_MUTATION } from "../GraphQL/Mutations";
 import { useMutation } from "@apollo/client";
 
 var _id;
 
 function Form() {
   const [name, setName] = useState("");
-  const [city, setCity] = useState("");
-  const [street, setStreet] = useState("");
-  const [spa, setSpa] = useState("");
-  const [swimmingPool, setSwimmingPool] = useState("");
+  const [description, setDescription] = useState("");
+  const [capacity, setCapacity] = useState("");
+  const [price, setPrice] = useState("");
+  const [propertyId, setPropertyId] = useState("");
 
-  const [CreatePropertyInput, { loading, error, data: dataResponse }] = useMutation(CREATE_PROPERTY_MUTATION, {
+  const [CreateTrulloInput, { loading, error, data: dataResponse }] = useMutation(CREATE_TRULLO_MUTATION, {
 
     onSuccess: async () => {
  
       console.log(dataResponse);
-      document.getElementById("result").text = dataResponse;
+      //document.getElementById("result").text = dataResponse;
  
     }});
 
-  const addProperty = () => {
-    CreatePropertyInput({
+  const addTrullo = () => {
+    CreateTrulloInput({
       variables: {
         inputType: {
           name: name,
-          city: city,
-          street: street,
-          spa: true,
-          swimmingPool: false
+          description: description,
+          capacity: capacity,
+          price: price,
+          propertyId: propertyId
         }
       },
     });
@@ -48,54 +48,53 @@ function Form() {
           />
         </label>
         <label>
-          City:
+          Description:
           <input
             type="text"
-            placeholder="City"
+            placeholder="Description"
             onChange={(e) => {
-              setCity(e.target.value);
+              setDescription(e.target.value);
             }}
           />
         </label>
         <label>
-          Street:
+          Capacity:
           <input
             type="text"
-            placeholder="Street"
+            placeholder="Capacity"
             onChange={(e) => {
-              setStreet(e.target.value);
+              setCapacity(Number(e.target.value));
             }}
           />
         </label>
         <label>
-          SPA:
+          Price:
           <input
-            type="checkbox"
+            type="text"
             onChange={(e) => {
-              setSpa(e.target.value);
+              setPrice(Number(e.target.value));
             }}
           />
         </label>
         <label>
-          Swimming Pool:
+          PropertyId:
           <input
-            type="checkbox"
+            type="text"
             onChange={(e) => {
-              setSwimmingPool(e.target.value);
+              setPropertyId(e.target.value);
             }}
           />
         </label>
-        <button onClick={addProperty}> Create Property</button>
+        <button onClick={addTrullo}> Create Trullo</button>
       </div>
 
       {loading && <p>Loading...</p>}
       {error && <p>Error :( Please try again</p>}
 
       { dataResponse != undefined &&
-          <p>Result -- {dataResponse.createProperty._id}</p>
+          <p>Result -- {dataResponse.createTrullo._id}</p>
       } 
 
-      <div id="result"></div>
     </div>
   );   
     

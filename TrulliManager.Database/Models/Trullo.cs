@@ -12,7 +12,6 @@ namespace TrulliManager.Database.Models
         public string _id { get; set; }
 
         [BsonRepresentation(BsonType.ObjectId)]
-        [Required]
         public string Property_id { get; set; }
         
         public string Name { get; set; }

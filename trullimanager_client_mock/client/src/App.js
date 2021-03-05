@@ -7,7 +7,7 @@ import {
   from,
 } from "@apollo/client";
 import { onError } from "@apollo/client/link/error";
-import GetProperties from "./Components/GetProperties";
+import GetProperties from "./Components/GetTrulli";
 import Form from "./Components/Form";
 
 const errorLink = onError(({ graphqlErrors, networkError }) => {
@@ -18,9 +18,12 @@ const errorLink = onError(({ graphqlErrors, networkError }) => {
   }
 });
 
+//const httplink = new HttpLink({ uri: "http://localhost:4000/graphql" })
+const httplink = new HttpLink({ uri: "http://localhost:5000/graphql" })
+
 const link = from([
   errorLink,
-  new HttpLink({ uri: "http://localhost:4000/graphql" }),
+  httplink,
 ]);
 
 const client = new ApolloClient({

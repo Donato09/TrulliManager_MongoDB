@@ -69,6 +69,26 @@ namespace TrulliManager_MongoDB
                 .AddSorting()
                 .AddProjections();
 
+                        // CORS
+            var cors = Environment.GetEnvironmentVariable("CORS");
+            var origins = cors?.Split(',', StringSplitOptions.RemoveEmptyEntries);
+
+            if (origins == null || origins.Length == 0)
+            {
+                origins = new string[] { "http://localhost", "http://localhost:3000" };
+            }
+
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(
+                builder =>
+                {
+                    builder.WithOrigins(origins)
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
+                });
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -84,6 +104,8 @@ namespace TrulliManager_MongoDB
                 // Non-blocking
                 //Task.Run(() => { app.ApplicationServices.GetRequiredService<IMongoDbWatch>().Watch(); });
             }
+
+            app.UseCors();
 
             //preload db
             db.EnsureSeedData();

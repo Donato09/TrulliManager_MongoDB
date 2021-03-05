@@ -1,15 +1,17 @@
 import { gql } from "@apollo/client";
 
-export const LOAD_PROPERTIES = gql`
+export const LOAD_TRULLI = gql`
   query {
-  properties {
+  trulli {
     nodes {
       _id,
-      city,
       name,
-      trulli {
+      price,
+      capacity,
+      property_id
+      property {
         _id,
-        name
+        name,
       }
     }
   }
