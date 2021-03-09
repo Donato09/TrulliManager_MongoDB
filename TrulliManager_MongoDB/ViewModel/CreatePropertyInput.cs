@@ -5,12 +5,12 @@ using System.Threading.Tasks;
 
 namespace TrulliManager_MongoDB.ViewModel
 {
-    public class CreatePropertyInput
-    {
-        public string Name { get; set; }
-        public string City { get; set; }
-        public string Street { get; set; }
-        public bool Spa { get; set; }
-        public bool SwimmingPool { get; set; }
-    }
+  public class CreatePropertyInput
+  {
+    public string Name { get; set; }
+    public string City { get; set; }
+    public string Street { get; set; }
+    public bool Spa { get; set; }
+    public bool SwimmingPool { get; set; }
+  }
 }

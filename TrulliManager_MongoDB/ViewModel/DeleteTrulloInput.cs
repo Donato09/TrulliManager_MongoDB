@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 
 namespace TrulliManager_MongoDB.ViewModel
 {
-    public class DeleteTrulloInput
-    {
-        public string Id { get; set; }
-    }
+  public class DeleteTrulloInput
+  {
+    public string Id { get; set; }
+  }
 }

@@ -6,11 +6,11 @@ using TrulliManager.Database.Models;
 
 namespace TrulliManager.Repository.Abstract
 {
-    public interface IPropertyRepository
+    public interface IPropertiesRepository
     {
-        IMongoQueryable<Property> GetAll();
-        Property GetByName(string name);
+        IMongoQueryable<Property> All();
+        Property ByName(string name);
         Property Create(Property property);
-        IEnumerable<Property> GetPropertiesByIds(IEnumerable<string> propertyIds);
+        IEnumerable<Property> ByKeys(IEnumerable<string> propertyIds);
     }
 }

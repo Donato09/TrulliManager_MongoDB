@@ -5,24 +5,24 @@ using System.ComponentModel.DataAnnotations;
 
 namespace TrulliManager.Database.Models
 {
-    public class Trullo
-    {
-        [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
-        public string _id { get; set; }
+  public class Trullo
+  {
+    [BsonId]
+    [BsonRepresentation(BsonType.ObjectId)]
+    public string _id { get; set; }
 
-        [BsonRepresentation(BsonType.ObjectId)]
-        public string Property_id { get; set; }
-        
-        public string Name { get; set; }
+    [BsonRepresentation(BsonType.ObjectId)]
+    public string Property_id { get; set; }
 
-        public string Description { get; set; }
+    [BsonIgnore]
+    public Property Property { get; set; }
 
-        public int Capacity { get; set; }
+    public string Name { get; set; }
 
-        public decimal Price { get; set; }
+    public string Description { get; set; }
 
-        [BsonIgnore]
-        public Property Property { get; set; }
-    }
+    public int Capacity { get; set; }
+
+    public decimal Price { get; set; }
+  }
 }

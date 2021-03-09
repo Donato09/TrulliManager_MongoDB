@@ -17,6 +17,7 @@ using TrulliManager.Repository.Concrete;
 using System.Threading;
 using MongoDbQuickWatch;
 using TrulliManager_MongoDB.Types;
+using TrulliManager_MongoDB.DataLoaders;
 
 namespace TrulliManager_MongoDB
 {
@@ -42,15 +43,17 @@ namespace TrulliManager_MongoDB
 
             //services.AddTransient<IMongoDbWatch, MongoDbWatch>();
 
-            services.AddTransient<IPropertyRepository, PropertyRepository>();
-            services.AddTransient<ITrulloRepository, TrulloRepository>();
+      // =DG=: alcuni contratti sia transienti che scoped. Perchè ?
+
+            services.AddTransient<IPropertiesRepository, PropertiesRepository>();
+            services.AddTransient<ITrulliRepository, TrulliRepository>();
 
             services.AddInMemorySubscriptions();
 
             services.AddScoped<TrulliContext>();
 
-            services.AddScoped<IPropertyRepository, PropertyRepository>();
-            services.AddScoped<ITrulloRepository, TrulloRepository>();
+            services.AddScoped<IPropertiesRepository, PropertiesRepository>();
+            services.AddScoped<ITrulliRepository, TrulliRepository>();
 
             //services.AddScoped<TrulloType>();
             //services.AddScoped<PropertyType>();
@@ -65,6 +68,8 @@ namespace TrulliManager_MongoDB
                 .AddMutationType<Mutation>()
                 .AddSubscriptionType<Subscription>()
                 .AddType<TrulloType>()
+                .AddType<PropertyType>()
+                //.BindResolver<TrulloResolver>()
                 .AddFiltering()
                 .AddSorting()
                 .AddProjections();

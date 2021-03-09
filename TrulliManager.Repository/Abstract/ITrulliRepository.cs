@@ -8,11 +8,11 @@ using TrulliManager.Database.Models;
 
 namespace TrulliManager.Repository.Abstract
 {
-    public interface ITrulloRepository
-    {
-        IMongoQueryable<Trullo> GetAll();
-        Trullo Delete(Trullo trullo);
-        Trullo GetTrulloById(string id);
-        Task<Trullo> Create(Trullo trullo);
-    }
+  public interface ITrulliRepository
+  {
+    Task<IMongoQueryable<Trullo>> All();
+    Task<Trullo> Create(Trullo trullo);
+    Trullo Remove(Trullo trullo);
+    Trullo ByKey(string id);
+  }
 }
