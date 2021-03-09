@@ -27,9 +27,8 @@ namespace TrulliManager_MongoDB.Types
       descriptor.Field(a => a.Price).Type<FloatType>();
       descriptor.Field(a => a.Property_id).Type<IdType>();
       descriptor.Include<TrulloResolver>();
-      descriptor.Field("properties").ResolveWith<TrulloResolver>(t => t.GetProperties(default!, default!, default!)).Type<ListType<NonNullType<PropertyType>>>().UseFiltering();
-      descriptor.Field("property").ResolveWith<TrulloResolver>(t => t.GetProperty(default!, default!, default!));
-      //descriptor.Field("property").ResolveWith<TrulloResolver>(t => t.GetProperty(default!, default!, default!)).UseDataloader<PropertyDataLoader>().UseFiltering<Property>();
+      descriptor.Field(nameof(Trullo.Property).ToLower()).ResolveWith<TrulloResolver>(t => t.GetProperty(default!, default!, default!)).UseFiltering();
+      //descriptor.Field(a => a.Property).ResolveWith<TrulloResolver>(t => t.GetProperty(default!, default!, default!));
     }
   }
 
